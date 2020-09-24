@@ -82,7 +82,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.Controllers.PurchasingDis
             Mock<IServiceProvider> serviceProvider = new Mock<IServiceProvider>();
             List<ValidationResult> validationResults = new List<ValidationResult>();
             System.ComponentModel.DataAnnotations.ValidationContext validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(this.ViewModel, serviceProvider.Object, null);
-            return new ServiceValidationExeption(validationContext, validationResults);
+            return new ServiceValidationException(validationContext, validationResults);
         }
 
         private int GetStatusCodeGet((Mock<IIdentityService> IdentityService, Mock<IValidateService> ValidateService, Mock<IPurchasingDispositionExpeditionService> Service, Mock<IMapper> Mapper) mocks)
@@ -181,6 +181,18 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.Controllers.PurchasingDis
 
             int statusCode = await GetStatusCodePost(mocks);
             Assert.Equal((int)HttpStatusCode.InternalServerError, statusCode);
+        }
+
+
+        [Fact]
+        public async Task Post_ThrowException_ServiceValidationException()
+        {
+            var mocks = GetMocks();
+            mocks.ValidateService.Setup(s => s.Validate(It.IsAny<PurchasingDispositionExpeditionViewModel>())).Verifiable();
+            mocks.Service.Setup(s => s.CreateAsync(It.IsAny<PurchasingDispositionExpeditionModel>())).ThrowsAsync(GetServiceValidationExeption());
+
+            int statusCode = await GetStatusCodePost(mocks);
+            Assert.Equal((int)HttpStatusCode.BadRequest, statusCode);
         }
 
         private async Task<int> GetStatusCodeDeleteByReferenceNo((Mock<IIdentityService> IdentityService, Mock<IValidateService> ValidateService, Mock<IPurchasingDispositionExpeditionService> Service, Mock<IMapper> Mapper) mocks)

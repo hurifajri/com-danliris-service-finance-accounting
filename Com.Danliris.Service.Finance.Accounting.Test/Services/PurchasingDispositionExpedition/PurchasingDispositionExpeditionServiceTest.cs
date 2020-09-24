@@ -198,7 +198,28 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.Services.PurchasingDispos
             Assert.NotEqual(0, Response);
         }
 
-        
+        [Fact]
+        public async Task UpdateAsync_Throws_NotImplementedException()
+        {
+            PurchasingDispositionExpeditionService service = new PurchasingDispositionExpeditionService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            PurchasingDispositionExpeditionModel model = await _dataUtil(service).GetTestData2();
+            var newModel = await service.ReadByIdAsync(model.Id);
+
+            await Assert.ThrowsAsync<NotImplementedException>(() => service.UpdateAsync(newModel.Id, newModel));
+          
+        }
+        [Fact]
+        public async Task Update_Throws_NotImplementedException()
+        {
+            PurchasingDispositionExpeditionService service = new PurchasingDispositionExpeditionService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            PurchasingDispositionExpeditionModel model = await _dataUtil(service).GetTestData2();
+            var newModel = await service.ReadByIdAsync(model.Id);
+
+            await Assert.ThrowsAsync<NotImplementedException>(() => service.Update(newModel.Id, newModel, "", 7));
+
+
+        }
+
 
         [Fact]
         public async Task Should_Success_Post_Acceptance_Verification()
@@ -330,6 +351,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.Services.PurchasingDispos
             nullVM.PurchasingDispositionExpedition = new List<PurchasingDispositionAcceptanceItemViewModel>();
 
             Assert.True(nullVM.Validate(null).Count() > 0);
+
             PurchasingDispositionAcceptanceViewModel vm = new PurchasingDispositionAcceptanceViewModel();
             vm.PurchasingDispositionExpedition = new List<PurchasingDispositionAcceptanceItemViewModel>()
             {

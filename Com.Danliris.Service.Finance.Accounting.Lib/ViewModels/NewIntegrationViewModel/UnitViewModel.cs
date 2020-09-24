@@ -11,4 +11,12 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.ViewModels.NewIntegrationV
         public string Name { get; set; }
         public DivisionViewModel Division { get; set; }
     }
+
+    public class NewUnitViewModel
+    {
+        public int Id { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public DivisionViewModel Division { get; set; }
+    }
 }

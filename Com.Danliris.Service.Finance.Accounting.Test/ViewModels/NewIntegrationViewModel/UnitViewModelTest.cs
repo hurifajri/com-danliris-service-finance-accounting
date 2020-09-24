@@ -15,23 +15,58 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.ViewModels.NewIntegration
             string code = "code test";
             string name = "name test";
 
-            DivisionViewModel divison = new DivisionViewModel();
-            divison.Id = "Id test";
-            divison.Code = "Code Test";
-            divison.Name = "Name test";
+            DivisionViewModel divisonViewModel = new DivisionViewModel()
+            {
+                Id = "Id test",
+                Code = "Code Test",
+                Name = "Name test",
+            };
 
-            UnitViewModel uvm = new UnitViewModel();
-            uvm.Id = id;
-            uvm.Name = name;
-            uvm.Code = code;
-            uvm.Division = divison;
-          
+            UnitViewModel unitViewModel = new UnitViewModel()
+            {
+                Id = id,
+                Name = name,
+                Code = code,
+                Division = divisonViewModel,
+            };
+
+            Assert.Equal(id, unitViewModel.Id);
+            Assert.Equal(name, unitViewModel.Name);
+            Assert.Equal(code, unitViewModel.Code);
+            Assert.NotNull(unitViewModel.Division);
+
+
+        }
+
+        [Fact]
+        public void Succes_Instantiate_NewUnitViewModel()
+        {
+            int id = 1;
+            string code = "code test";
+            string name = "name test";
+
+            DivisionViewModel divison = new DivisionViewModel()
+            {
+                Id = "Id test",
+                Code = "Code Test",
+                Name = "Name test",
+            };
+
+
+            NewUnitViewModel uvm = new NewUnitViewModel()
+            {
+                Id = 1,
+                Name = name,
+                Code = code,
+                Division = divison,
+            };
+
 
             Assert.Equal(id, uvm.Id);
             Assert.Equal(name, uvm.Name);
             Assert.Equal(code, uvm.Code);
             Assert.NotNull(uvm.Division);
-     
+
 
         }
 

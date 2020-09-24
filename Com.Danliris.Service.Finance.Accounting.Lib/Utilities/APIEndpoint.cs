@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Com.Danliris.Service.Finance.Accounting.Lib.Utilities
+﻿namespace Com.Danliris.Service.Finance.Accounting.Lib.Utilities
 {
     public class APIEndpoint
     {
@@ -10,5 +8,6 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.Utilities
         public static string Purchasing { get; set; }
         public static string Finishing { get; set; }
         public static string Finance { get; set; }
+        public static string Sales { get; set; }
     }
 }

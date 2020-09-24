@@ -119,13 +119,22 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.Services.JournalTransacti
         }
 
         [Fact]
-        public async Task Should_Success_Update_Data()
+        public async Task Should_Success_UpdateAsync_ExistData()
         {
             var service = new JournalTransactionService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
             var model = await _dataUtil(service).GetTestData();
-            var newModel = await service.ReadByIdAsync(model.Id);
-            newModel.Description = "NewDescription";
-            var Response = await service.UpdateAsync(newModel.Id, newModel);
+            var existData = await service.ReadByIdAsync(model.Id);
+            var Response = await service.UpdateAsync(existData.Id, existData);
+            Assert.NotEqual(0, Response);
+        }
+
+        [Fact]
+        public async Task Should_Success_UpdateAsync_NewData()
+        {
+            var service = new JournalTransactionService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            var model = await _dataUtil(service).GetTestData();
+            var newData = _dataUtil(service).GetNewData();
+            var Response = await service.UpdateAsync(model.Id, newData);
             Assert.NotEqual(0, Response);
         }
 
@@ -134,8 +143,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.Services.JournalTransacti
         {
             var service = new JournalTransactionService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
             var model = await _dataUtil(service).GetTestData();
-            //var modelToDelete = await service.ReadByIdAsync(model.Id);
-
+           
             var Response = await service.DeleteAsync(model.Id);
             Assert.NotEqual(0, Response);
         }
@@ -292,6 +300,16 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.Services.JournalTransacti
             var reportResponse2 = await service.GetSubLedgerReportXls(null, data.Date.Month, data.Date.Year, 1);
             Assert.NotNull(reportResponse2);
         }
+
+        [Fact]
+        public async Task Should_Success_GetSubLedgerReportXls_When_EmptyData()
+        {
+            var service = new JournalTransactionService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+
+            var result = await service.GetSubLedgerReportXls(null, DateTime.Now.Month, DateTime.Now.Year, 1);
+            Assert.NotNull(result);
+        }
+
 
         [Fact]
         public async Task Should_Success_Generate_SubLedger()
@@ -458,6 +476,26 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.Services.JournalTransacti
             var model = _dataUtil(service).GetNewPostedData();
             await service.CreateAsync(model);
 
+            var response = await service.GetGeneralLedgerReportXls(DateTime.Now.AddYears(-1), DateTime.Now.AddYears(1), 0);
+
+            Assert.NotNull(response);
+        }
+
+        [Fact]
+        public async Task Should_Success_GetGeneralLedgerReportXls_DataNoExist()
+        {
+            var service = new JournalTransactionService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            
+            var response = await service.GetGeneralLedgerReportXls(DateTime.Now.AddYears(-1), DateTime.Now.AddYears(1), 0);
+
+            Assert.NotNull(response);
+        }
+
+        [Fact]
+        public async Task Should_Success_GetGeneralLedgerReportXls_When_DataNoExist()
+        {
+            var service = new JournalTransactionService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+          
             var response = await service.GetGeneralLedgerReportXls(DateTime.Now.AddYears(-1), DateTime.Now.AddYears(1), 0);
 
             Assert.NotNull(response);

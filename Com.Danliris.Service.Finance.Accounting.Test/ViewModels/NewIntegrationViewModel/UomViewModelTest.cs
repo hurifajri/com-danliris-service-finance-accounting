@@ -6,8 +6,8 @@ using Xunit;
 
 namespace Com.Danliris.Service.Finance.Accounting.Test.ViewModels.NewIntegrationViewModel
 {
- 
-   public class UomViewModelTest
+
+    public class UomViewModelTest
     {
         [Fact]
         public void Succes_Instantiate_UomViewModel()
@@ -15,9 +15,11 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.ViewModels.NewIntegration
             string id = "id test";
             string Unit = "Unit test";
 
-            UomViewModel uvm = new UomViewModel();
-            uvm.Id = id;
-            uvm.Unit = Unit;
+            UomViewModel uvm = new UomViewModel()
+            {
+                Id = id,
+                Unit = Unit,
+            };
 
             Assert.Equal(id, uvm.Id);
             Assert.Equal(Unit, uvm.Unit);

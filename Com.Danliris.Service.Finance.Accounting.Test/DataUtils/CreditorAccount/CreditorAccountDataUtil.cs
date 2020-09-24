@@ -17,6 +17,23 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.DataUtils.CreditorAccount
             Service = service;
         }
 
+        public async Task<CreditorAccountModel> GetTestData_CreditorAccountModel()
+        {
+            var data = GetNewData_CreditorAccountModel();
+            await Service.CreateAsync(data);
+            var result = Service.ReadModelById(data.Id);
+            return await result;
+        }
+
+        public  CreditorAccountModel GetNewData_CreditorAccountModel()
+        {
+            return new CreditorAccountModel()
+            {
+                SupplierName = "SupplierName"
+            };
+
+
+        }
         public CreditorAccountUnitReceiptNotePostedViewModel GetUnitReceiptNotePostedViewModel()
         {
             return new CreditorAccountUnitReceiptNotePostedViewModel()

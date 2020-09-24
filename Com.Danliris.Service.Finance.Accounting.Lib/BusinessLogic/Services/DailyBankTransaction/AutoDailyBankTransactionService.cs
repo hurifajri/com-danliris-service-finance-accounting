@@ -26,20 +26,22 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.Services.Dai
 
         public Task<int> AutoCreateFromPaymentDisposition(PaymentDispositionNoteModel model)
         {
+            var nominal = model.Items.Sum(item => (decimal)item.TotalPaid * (decimal)model.CurrencyRate);
             var dailyBankTransactionModel = new DailyBankTransactionModel()
             {
                 AccountBankAccountName = model.BankAccountName,
                 AccountBankAccountNumber = model.BankAccountNumber,
                 AccountBankCode = model.BankCode,
-                AccountBankCurrencyCode = model.CurrencyCode,
-                AccountBankCurrencyId = model.CurrencyId,
-                AccountBankCurrencySymbol = model.CurrencyCode,
+                AccountBankCurrencyCode = model.BankCurrencyCode,
+                AccountBankCurrencyId = model.BankCurrencyId,
+                AccountBankCurrencySymbol = model.BankCurrencyCode,
                 AccountBankId = model.BankId,
                 AccountBankName = model.BankName,
                 Date = model.PaymentDate,
-                Nominal = model.Items.Sum(item => (decimal)item.TotalPaid * (decimal)model.CurrencyRate),
+                Nominal = nominal,
                 ReferenceNo = model.PaymentDispositionNo,
-                Remark = "Auto Generate Disposition Payment",
+                ReferenceType = "Pembayaran Disposisi",
+                Remark = model.CurrencyCode != "IDR" ? $"Pembayaran atas {model.BankCurrencyCode} dengan nominal {string.Format("{0:n}", nominal)} dan kurs {model.CurrencyCode}" : "",
                 SourceType = model.TransactionType,
                 SupplierCode = model.SupplierCode,
                 SupplierId = model.SupplierId,
@@ -51,20 +53,22 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.Services.Dai
 
         public Task<int> AutoRevertFromPaymentDisposition(PaymentDispositionNoteModel model)
         {
+            var nominal = model.Items.Sum(item => (decimal)item.TotalPaid * (decimal)model.CurrencyRate);
             var dailyBankTransactionModel = new DailyBankTransactionModel()
             {
                 AccountBankAccountName = model.BankAccountName,
                 AccountBankAccountNumber = model.BankAccountNumber,
                 AccountBankCode = model.BankCode,
-                AccountBankCurrencyCode = model.CurrencyCode,
-                AccountBankCurrencyId = model.CurrencyId,
-                AccountBankCurrencySymbol = model.CurrencyCode,
+                AccountBankCurrencyCode = model.BankCurrencyCode,
+                AccountBankCurrencyId = model.BankCurrencyId,
+                AccountBankCurrencySymbol = model.BankCurrencyCode,
                 AccountBankId = model.BankId,
                 AccountBankName = model.BankName,
                 Date = model.PaymentDate,
-                Nominal = model.Items.Sum(item => (decimal)item.TotalPaid * (decimal)model.CurrencyRate),
+                Nominal = nominal,
                 ReferenceNo = model.PaymentDispositionNo,
-                Remark = "Auto Generate Disposition Payment",
+                ReferenceType = "Pembayaran Disposisi",
+                Remark = model.CurrencyCode != "IDR" ? $"Pembayaran atas {model.BankCurrencyCode} dengan nominal {string.Format("{0:n}", nominal)} dan kurs {model.CurrencyCode}" : "",
                 SourceType = model.TransactionType,
                 SupplierCode = model.SupplierCode,
                 SupplierId = model.SupplierId,
@@ -104,9 +108,9 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.Services.Dai
                 Date = model.Date,
                 Nominal = itemModels.Sum(item => item.Debit),
                 ReferenceNo = model.DocumentNo,
-                Remark = "Auto Generate Pembayaran Lain - lain",
+                Remark = "Pembayaran Lain - lain",
                 SourceType = model.Type,
-                Status = "IN"
+                Status = "OUT"
             };
             return await _dailyBankTransactionService.CreateAsync(dailyBankTransactionModel);
         }
@@ -127,7 +131,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.Services.Dai
                 Date = model.Date,
                 Nominal = itemModels.Sum(item => item.Debit),
                 ReferenceNo = model.DocumentNo,
-                Remark = "Auto Generate Pembayaran Lain - lain",
+                Remark = "Pembayaran Lain - lain",
                 SourceType = model.Type,
                 Status = "IN"
             };

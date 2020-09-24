@@ -166,5 +166,17 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.Services.PaymentDispositi
             var reportResponse = report.GenerateExcel("", "", "", model.VerifyDate, tomorrow, 7, "history");
             Assert.NotNull(reportResponse);
         }
+
+        [Fact]
+        public void Should_Success_GenerateExcel_When_DataNoExist()
+        {
+            PurchasingDispositionExpeditionService service = new PurchasingDispositionExpeditionService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+
+            PaymentDispositionNotVerifiedReportService report = new PaymentDispositionNotVerifiedReportService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+
+            DateTimeOffset tomorrow = DateTimeOffset.UtcNow.AddDays(1);
+            var reportResponse = report.GenerateExcel("", "", "", DateTimeOffset.Now, tomorrow, 7, "history");
+            Assert.NotNull(reportResponse);
+        }
     }
 }

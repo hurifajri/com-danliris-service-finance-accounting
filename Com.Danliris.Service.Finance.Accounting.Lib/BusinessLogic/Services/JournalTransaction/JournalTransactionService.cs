@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Globalization;
 using System.IO;
@@ -51,7 +52,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.Services.Jou
         {
             int created = 0;
             model.DocumentNo = GenerateDocumentNo(model);
-            foreach(var item in model.Items)
+            foreach (var item in model.Items)
             {
                 var coa = _COADbSet.FirstOrDefault(f => f.Id.Equals(item.COA.Id) || f.Code.Equals(item.COA.Code));
                 if (coa == null)
@@ -74,7 +75,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.Services.Jou
                 model.Status = JournalTransactionStatus.Draft;
 
             EntityExtension.FlagForCreate(model, _IdentityService.Username, _UserAgent);
-            
+
 
             foreach (var item in model.Items)
             {
@@ -861,6 +862,18 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.Services.Jou
         public async Task<int> PostTransactionAsync(int id)
         {
             var model = _DbSet.Include(x => x.Items).FirstOrDefault(f => f.Id.Equals(id));
+
+            var debit = model.Items.Where(item => item.Debit > 0).Sum(item => item.Debit);
+            var credit = model.Items.Where(item => item.Credit > 0).Sum(item => item.Credit);
+            if (debit != credit)
+            {
+                var errorResult = new List<ValidationResult>()
+                {
+                    new ValidationResult("Total Debit dan Kredit harus sama", new List<string> { "Differences" })
+                };
+                ValidationContext validationContext = new ValidationContext(model, _serviceProvider, null);
+                throw new ServiceValidationException(validationContext, errorResult);
+            }
 
             if (model.Status != JournalTransactionStatus.Posted)
             {

@@ -22,6 +22,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.Utilities
             Assert.NotNull(terbilang);
         }
 
+
         //[Fact]
         //public void Should_Success_Terbilang_IsNegative_Decimal()
         //{
@@ -32,7 +33,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.Utilities
         [Fact]
         public void Should_Success_TerbilangKoma_MoreThan_4_DecimalPlace()
         {
-            var terbilangKoma = NumberToTextIDN.terbilangKoma(00123);
+            var terbilangKoma = NumberToTextIDN.terbilangKoma(123.45678);
             Assert.NotNull(terbilangKoma);
         }
 

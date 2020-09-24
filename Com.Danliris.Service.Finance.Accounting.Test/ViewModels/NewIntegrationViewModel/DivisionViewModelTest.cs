@@ -15,14 +15,14 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.ViewModels.NewIntegration
             string nama = "name test";
             string code = "code test";
 
-            DivisionViewModel dvm = new DivisionViewModel();
-            dvm.Id = id;
-            dvm.Name = nama;
-            dvm.Code = code;
+            DivisionViewModel viewModel = new DivisionViewModel();
+            viewModel.Id = id;
+            viewModel.Name = nama;
+            viewModel.Code = code;
 
-            Assert.Equal(id, dvm.Id);
-            Assert.Equal(nama, dvm.Name);
-            Assert.Equal(code, dvm.Code);
+            Assert.Equal(id, viewModel.Id);
+            Assert.Equal(nama, viewModel.Name);
+            Assert.Equal(code, viewModel.Code);
         }
     }
 }

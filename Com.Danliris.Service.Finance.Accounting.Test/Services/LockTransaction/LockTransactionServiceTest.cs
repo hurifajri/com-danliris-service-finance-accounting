@@ -133,6 +133,18 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.Services.LockTransaction
         }
 
         [Fact]
+        public void Should_Success_Validate_LockDateNull()
+        {
+            var vm = new LockTransactionViewModel
+            {
+                LockDate = null
+            };
+
+            Assert.True(vm.Validate(null).Count() > 0);
+        }
+
+
+        [Fact]
         public async Task Should_Success_Update_Data()
         {
             var service = new LockTransactionService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));

@@ -7,7 +7,7 @@ using Xunit;
 namespace Com.Danliris.Service.Finance.Accounting.Test.ViewModels.NewIntegrationViewModel
 {
 
-  public  class CategoryViewModelTest
+    public class CategoryViewModelTest
     {
         [Fact]
         public void Should_Success_Instantiate_CategoryViewModel()
@@ -16,17 +16,19 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.ViewModels.NewIntegration
             string nama = "name test";
             string code = "code test";
 
-            CategoryViewModel cvm = new CategoryViewModel();
-            cvm.Id = id;
-            cvm.Name = nama;
-            cvm.Code = code;
+            CategoryViewModel viewModel = new CategoryViewModel()
+            {
+                Id = id,
+                Name = nama,
+                Code = code,
+            };
 
-            Assert.Equal(id, cvm.Id);
-            Assert.Equal(nama, cvm.Name);
-            Assert.Equal(code, cvm.Code);
+            Assert.Equal(id, viewModel.Id);
+            Assert.Equal(nama, viewModel.Name);
+            Assert.Equal(code, viewModel.Code);
         }
 
-        
+
 
     }
 }

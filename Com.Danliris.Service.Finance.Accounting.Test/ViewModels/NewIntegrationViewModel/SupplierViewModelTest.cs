@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Com.Danliris.Service.Finance.Accounting.Test.ViewModels.NewIntegrationViewModel
 {
-  public  class SupplierViewModelTest
+    public class SupplierViewModelTest
     {
         [Fact]
         public void Should_Success_Instantiate()
@@ -18,21 +18,22 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.ViewModels.NewIntegration
             string PIC = "PIC test";
             string contact = "conatct test";
 
-            SupplierViewModel spm = new SupplierViewModel();
-            spm.Id = id;
-            spm.Code = code;
-            spm.Name = nama;
-            spm.Import = import;
-            spm.PIC = PIC;
-            spm.Contact = contact;
+            SupplierViewModel viewModel = new SupplierViewModel()
+            {
+                Id = id,
+                Code = code,
+                Name = nama,
+                Import = import,
+                PIC = PIC,
+                Contact = contact,
+            };
 
-
-            Assert.Equal(id, spm.Id);
-            Assert.Equal(nama, spm.Name);
-            Assert.Equal(code, spm.Code);
-            Assert.Equal(import, spm.Import);
-            Assert.Equal(PIC, spm.PIC);
-            Assert.Equal(contact, spm.Contact);
+            Assert.Equal(id, viewModel.Id);
+            Assert.Equal(nama, viewModel.Name);
+            Assert.Equal(code, viewModel.Code);
+            Assert.Equal(import, viewModel.Import);
+            Assert.Equal(PIC, viewModel.PIC);
+            Assert.Equal(contact, viewModel.Contact);
         }
     }
 
@@ -53,12 +54,12 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.ViewModels.NewIntegration
             nspm.code = code;
             nspm.name = nama;
             nspm.import = import;
-           
+
             Assert.Equal(id, nspm._id);
             Assert.Equal(nama, nspm.name);
             Assert.Equal(code, nspm.code);
             Assert.Equal(import, nspm.import);
-           
+
         }
     }
 }

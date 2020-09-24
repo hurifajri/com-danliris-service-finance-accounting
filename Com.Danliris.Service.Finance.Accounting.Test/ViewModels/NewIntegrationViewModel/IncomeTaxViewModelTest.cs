@@ -16,14 +16,14 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.ViewModels.NewIntegration
             string nama = "name test";
             double rate = 1.1;
 
-            IncomeTaxViewModel ivm = new IncomeTaxViewModel();
-            ivm.Id = id;
-            ivm.Name = nama;
-            ivm.Rate = rate;
+            IncomeTaxViewModel viewModel = new IncomeTaxViewModel();
+            viewModel.Id = id;
+            viewModel.Name = nama;
+            viewModel.Rate = rate;
 
-            Assert.Equal(id, ivm.Id);
-            Assert.Equal(nama, ivm.Name);
-            Assert.Equal(rate, ivm.Rate);
+            Assert.Equal(id, viewModel.Id);
+            Assert.Equal(nama, viewModel.Name);
+            Assert.Equal(rate, viewModel.Rate);
         }
     }
 }

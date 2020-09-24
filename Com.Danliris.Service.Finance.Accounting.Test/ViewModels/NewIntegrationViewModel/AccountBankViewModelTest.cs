@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Com.Danliris.Service.Finance.Accounting.Test.ViewModels.NewIntegrationViewModel
 {
-   public class AccountBankViewModelTest
+    public class AccountBankViewModelTest
     {
         [Fact]
         public void Should_Success_Instantiate()
@@ -19,21 +19,25 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.ViewModels.NewIntegration
             string BankName = "BankName test";
             CurrencyViewModel cvm = new CurrencyViewModel();
 
-            AccountBankViewModel abvm = new AccountBankViewModel();
-            abvm.Id = id;
-            abvm.Code = code;
-            abvm.BankCode = BankCode;
-            abvm.AccountName = AccountName;
-            abvm.AccountNumber = AccountNumber;
-            abvm.BankName = BankName;
-            abvm.Currency = cvm;
+            AccountBankViewModel viewmodel = new AccountBankViewModel()
+            {
+                Id = id,
+                Code = code,
+                BankCode = BankCode,
+                AccountName = AccountName,
+                AccountNumber = AccountNumber,
+                BankName = BankName,
+                Currency = cvm
+            };
 
-            Assert.Equal(id, abvm.Id);
-            Assert.Equal(code, abvm.Code);
-            Assert.Equal(BankCode, abvm.BankCode);
-            Assert.Equal(AccountName, abvm.AccountName);
-            Assert.Equal(AccountNumber, abvm.AccountNumber);
-            Assert.Equal(cvm, abvm.Currency);
+
+
+            Assert.Equal(id, viewmodel.Id);
+            Assert.Equal(code, viewmodel.Code);
+            Assert.Equal(BankCode, viewmodel.BankCode);
+            Assert.Equal(AccountName, viewmodel.AccountName);
+            Assert.Equal(AccountNumber, viewmodel.AccountNumber);
+            Assert.Equal(cvm, viewmodel.Currency);
 
         }
     }

@@ -16,21 +16,21 @@ namespace Com.Danliris.Service.Finance.Accounting.Test.ViewModels.NewIntegration
             string nama = "name test";
             double Price = 1.1;
 
-            UomViewModel uvm = new UomViewModel();
+            UomViewModel uomViewModel = new UomViewModel();
             
 
-            ProductViewModel pvm = new ProductViewModel();
-            pvm.Id = id;
-            pvm.Name = nama;
-            pvm.Code = code;
-            pvm.Price = Price;
-            pvm.UOM = uvm;
+            ProductViewModel productViewModel = new ProductViewModel();
+            productViewModel.Id = id;
+            productViewModel.Name = nama;
+            productViewModel.Code = code;
+            productViewModel.Price = Price;
+            productViewModel.UOM = uomViewModel;
 
-            Assert.Equal(id, pvm.Id);
-            Assert.Equal(nama, pvm.Name);
-            Assert.Equal(code, pvm.Code);
-            Assert.Equal(Price, pvm.Price);
-            Assert.NotNull( pvm.UOM);
+            Assert.Equal(id, productViewModel.Id);
+            Assert.Equal(nama, productViewModel.Name);
+            Assert.Equal(code, productViewModel.Code);
+            Assert.Equal(Price, productViewModel.Price);
+            Assert.NotNull( productViewModel.UOM);
 
         }
     }

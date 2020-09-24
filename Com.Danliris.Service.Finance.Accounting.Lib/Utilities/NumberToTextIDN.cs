@@ -104,12 +104,29 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.Utilities
 
         public static string terbilangKoma(double frac)
         {
-            var a = frac.ToString().Substring(frac.ToString().IndexOf(".") + 1);
-            var fixNumber = "";
+            var stringFrac = frac.ToString();
+            var a = "";
 
+            if (stringFrac.IndexOf(".") > -1)
+            {
+                a = frac.ToString().Substring(frac.ToString().IndexOf(".") + 1);
+            }
+            else if (stringFrac.IndexOf(",") > -1)
+            {
+                a = frac.ToString().Substring(frac.ToString().IndexOf(",") + 1);
+            }
+
+            string fixNumber = "";
             if (a.Length > 4)
             {
-                fixNumber = (frac.ToString("N4")).ToString().Substring((frac.ToString("N4")).ToString().IndexOf(".") + 1);
+                if (stringFrac.IndexOf(".") > -1)
+                {
+                    fixNumber = (frac.ToString("N4")).ToString().Substring((frac.ToString("N4")).ToString().IndexOf(".") + 1);
+                }
+                else if (stringFrac.IndexOf(",") > -1)
+                {
+                    fixNumber = (frac.ToString("N4")).ToString().Substring((frac.ToString("N4")).ToString().IndexOf(",") + 1);
+                }
             }
             else
             {

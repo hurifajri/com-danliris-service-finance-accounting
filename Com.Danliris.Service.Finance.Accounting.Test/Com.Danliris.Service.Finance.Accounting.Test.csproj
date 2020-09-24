@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Com.Danliris.Service.Finance.Accounting.WebApi\Com.Danliris.Service.Finance.Accounting.WebApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\NewFolder\" />
+  </ItemGroup>
+
 </Project>
