@@ -102,7 +102,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.GarmentPurch
             var models = new List<GarmentPurchasingExpeditionModel>();
             foreach (var item in form.Items)
             {
-                var model = new GarmentPurchasingExpeditionModel(item.InternalNote.Id, item.InternalNote.DocumentNo, item.InternalNote.Date, item.InternalNote.DueDate, item.InternalNote.SupplierId, item.InternalNote.SupplierName, item.InternalNote.VAT, item.InternalNote.IncomeTax, item.InternalNote.TotalPaid, item.InternalNote.CurrencyId, item.InternalNote.CurrencyCode, item.Remark, item.InternalNote.AmountDPP, item.InternalNote.PaymentMethod, item.InternalNote.PaymentType, item.InternalNote.PaymentDueDays, item.InternalNote.InvoicesNo);
+                var model = new GarmentPurchasingExpeditionModel(item.InternalNote.Id, item.InternalNote.DocumentNo, item.InternalNote.Date, item.InternalNote.DueDate, item.InternalNote.SupplierId, item.InternalNote.SupplierName, item.InternalNote.VAT, item.InternalNote.IncomeTax, item.InternalNote.TotalPaid, item.InternalNote.CurrencyId, item.InternalNote.CurrencyCode, item.Remark, item.InternalNote.AmountDPP, item.InternalNote.CorrectionAmount, item.InternalNote.PaymentMethod, item.InternalNote.PaymentType, item.InternalNote.PaymentDueDays, item.InternalNote.InvoicesNo);
                 model.SendToAccounting(_identityService.Username);
 
                 EntityExtension.FlagForCreate(model, _identityService.Username, UserAgent);
@@ -159,7 +159,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.GarmentPurch
             var models = new List<GarmentPurchasingExpeditionModel>();
             foreach (var item in form.Items)
             {
-                var model = new GarmentPurchasingExpeditionModel(item.InternalNote.Id, item.InternalNote.DocumentNo, item.InternalNote.Date, item.InternalNote.DueDate, item.InternalNote.SupplierId, item.InternalNote.SupplierName, item.InternalNote.VAT, item.InternalNote.IncomeTax, item.InternalNote.TotalPaid, item.InternalNote.CurrencyId, item.InternalNote.CurrencyCode, item.Remark, item.InternalNote.AmountDPP, item.InternalNote.PaymentMethod, item.InternalNote.PaymentType, item.InternalNote.PaymentDueDays, item.InternalNote.InvoicesNo);
+                var model = new GarmentPurchasingExpeditionModel(item.InternalNote.Id, item.InternalNote.DocumentNo, item.InternalNote.Date, item.InternalNote.DueDate, item.InternalNote.SupplierId, item.InternalNote.SupplierName, item.InternalNote.VAT, item.InternalNote.IncomeTax, item.InternalNote.TotalPaid, item.InternalNote.CurrencyId, item.InternalNote.CurrencyCode, item.Remark, item.InternalNote.AmountDPP, item.InternalNote.CorrectionAmount, item.InternalNote.PaymentMethod, item.InternalNote.PaymentType, item.InternalNote.PaymentDueDays, item.InternalNote.InvoicesNo);
                 model.SendToVerification(_identityService.Username);
 
                 EntityExtension.FlagForCreate(model, _identityService.Username, UserAgent);

@@ -15,7 +15,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.Models.BudgetCashflow
 
         }
 
-        public BudgetCashflowSubCategoryModel(string name, int cashflowCategoryId, int layoutOrder, List<int> purchasingCategoryIds, bool isReadOnly, ReportType reportType)
+        public BudgetCashflowSubCategoryModel(string name, int cashflowCategoryId, int layoutOrder, List<int> purchasingCategoryIds, bool isReadOnly, ReportType reportType, bool isImport)
         {
             Name = name;
             CashflowCategoryId = cashflowCategoryId;
@@ -27,6 +27,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.Models.BudgetCashflow
             PurchasingCategoryIds = JsonConvert.SerializeObject(purchasingCategoryIds);
             IsReadOnly = isReadOnly;
             ReportType = reportType;
+            IsImport = isImport;
         }
 
         [MaxLength(512)]
@@ -36,6 +37,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.Models.BudgetCashflow
         public string PurchasingCategoryIds { get; private set; }
         public bool IsReadOnly { get; private set; }
         public ReportType ReportType { get; private set; }
+        public bool IsImport { get; private set; }
 
         public void SetNewValue(int cashflowCategoryId, bool isReadOnly, int layoutOrder, string name, List<int> purchasingCategoryIds, ReportType reportType)
         {

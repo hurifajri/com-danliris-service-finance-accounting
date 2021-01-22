@@ -2,8 +2,8 @@
 {
     public class CurrencyDto
     {
-        public int Id { get; private set; }
-        public string Code { get; private set; }
-        public double Rate { get; private set; }
+        public int Id { get; set; }
+        public string Code { get; set; }
+        public double Rate { get; set; }
     }
 }

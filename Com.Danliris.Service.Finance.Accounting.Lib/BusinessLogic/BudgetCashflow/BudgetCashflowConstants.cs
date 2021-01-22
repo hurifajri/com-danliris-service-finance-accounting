@@ -17,7 +17,9 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
     public enum ReportType
     {
         [Description("Laporan Hutang dan Disposisi")]
-        DebtAndDispositionSummary = 1
+        DebtAndDispositionSummary = 1,
+        [Description("Laporan Pembelian")]
+        PurchasingReport
     }
 
     public static class CashTypeEnumExtensions

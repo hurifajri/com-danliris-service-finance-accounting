@@ -16,6 +16,24 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
             IsIDR = Currency.Code == "IDR";
         }
 
+        public BudgetCashflowUnitItemDto(RealCashBalanceModel entity, List<CurrencyDto> currencies)
+        {
+            Currency = currencies.FirstOrDefault(currency => currency.Id == entity.CurrencyId);
+            Nominal = entity.Nominal;
+            CurrencyNominal = entity.CurrencyNominal;
+            Total = entity.Total;
+            IsIDR = Currency.Code == "IDR";
+        }
+
+        public BudgetCashflowUnitItemDto(InitialCashBalanceModel entity, List<CurrencyDto> currencies)
+        {
+            Currency = currencies.FirstOrDefault(currency => currency.Id == entity.CurrencyId);
+            Nominal = entity.Nominal;
+            CurrencyNominal = entity.CurrencyNominal;
+            Total = entity.Total;
+            IsIDR = Currency.Code == "IDR";
+        }
+
         public CurrencyDto Currency { get; private set; }
         public double Nominal { get; private set; }
         public double CurrencyNominal { get; private set; }

@@ -101,7 +101,7 @@ namespace Com.Danliris.Service.Finance.Accounting.WebApi.Controllers.v1
                 VerifyUser();
                 _validateService.Validate(form);
 
-                _service.EditBudgetCashflowType(id, form);
+                _service.UpdateBudgetCashflowType(id, form);
 
                 return NoContent();
             }
@@ -222,7 +222,7 @@ namespace Com.Danliris.Service.Finance.Accounting.WebApi.Controllers.v1
                 VerifyUser();
                 _validateService.Validate(form);
 
-                _service.EditBudgetCashflowCategory(id, form);
+                _service.UpdateBudgetCashflowCategory(id, form);
 
                 return NoContent();
             }
@@ -343,7 +343,7 @@ namespace Com.Danliris.Service.Finance.Accounting.WebApi.Controllers.v1
                 VerifyUser();
                 _validateService.Validate(form);
 
-                _service.EditBudgetCashflowSubCategory(id, form);
+                _service.UpdateBudgetCashflowSubCategory(id, form);
 
                 return NoContent();
             }

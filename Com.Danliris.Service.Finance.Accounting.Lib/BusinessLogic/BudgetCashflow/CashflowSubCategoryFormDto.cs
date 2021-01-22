@@ -11,6 +11,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
         public int LayoutOrder { get; set; }
         public bool IsReadOnly { get; set; }
         public ReportType ReportType { get; set; }
+        public bool IsImport { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

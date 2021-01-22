@@ -73,6 +73,65 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
             Items = new List<UnitItemDto>();
         }
 
+        public BudgetCashflowItemDto(bool isShowSummaryLabel, string label, CurrencyDto currency, double nominal, double currencyNominal, double actual, bool isShowSummary)
+        {
+            Currency = currency;
+            Nominal = nominal;
+            CurrencyNominal = currencyNominal;
+            IsShowSummaryLabel = isShowSummaryLabel;
+            IsShowSummary = isShowSummary;
+            Total = actual;
+            SummaryLabel = label;
+        }
+
+        public BudgetCashflowItemDto(bool isShowSummaryBalance, string label, CurrencyDto currency, double nominal, double currencyNominal, double total, bool isSummaryBalance, string type = "summary", bool isReadOnly = false)
+        {
+            IsShowSummaryBalance = isShowSummaryBalance;
+            SummaryBalanceLabel = label;
+            IsSummaryBalance = isSummaryBalance;
+            IsReadOnly = isReadOnly;
+            Currency = currency;
+            Nominal = nominal;
+            CurrencyNominal = currencyNominal;
+            Total = total;
+        }
+
+        public BudgetCashflowItemDto(bool isShowRealCashBalanceLabel, RealCashBalanceModel realCashBalance, CurrencyDto currency)
+        {
+            Currency = currency;
+            IsShowRealCashBalanceLabel = isShowRealCashBalanceLabel;
+            Currency = currency;
+            Nominal = realCashBalance.Nominal;
+            CurrencyNominal = realCashBalance.CurrencyNominal;
+            Total = realCashBalance.Total;
+            IsRealCashBalance = true;
+        }
+
+        public BudgetCashflowItemDto(bool isShowCurrencyRateLabel, CurrencyDto currency)
+        {
+            Currency = currency;
+            IsShowCurrencyRateLabel = isShowCurrencyRateLabel;
+            IsShowCurrencyRate = true;
+        }
+
+        public BudgetCashflowItemDto(bool isShowRealCashDifferenceLabel, string label, CurrencyDto currency, double nominal, double currencyNominal, double total)
+        {
+            Currency = currency;
+            Nominal = nominal;
+            CurrencyNominal = currencyNominal;
+            Total = total;
+            RealCashDifferenceLabel = label;
+            IsShowRealCashDifferenceLabel = isShowRealCashDifferenceLabel;
+            IsShowRealCashDifference = true;
+        }
+
+        public BudgetCashflowItemDto(string label, double total)
+        {
+            EquivalentDifferenceLabel = label;
+            IsEquivalentDifference = true;
+            Total = total;
+        }
+
         public List<UnitItemDto> Items { get; private set; }
 
         public int CashflowTypeId { get; private set; }
@@ -91,14 +150,29 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
         public string SubCategoryName { get; private set; }
         public bool IsReadOnly { get; private set; }
         public CurrencyDto Currency { get; private set; }
+        public bool IsShowCurrencyRateLabel { get; private set; }
+        public bool IsShowCurrencyRate { get; private set; }
+        public bool IsShowRealCashBalanceLabel { get; private set; }
         public double Nominal { get; private set; }
         public double CurrencyNominal { get; private set; }
+        public bool IsShowSummaryLabel { get; private set; }
+        public bool IsShowSummary { get; private set; }
+        public string EquivalentDifferenceLabel { get; private set; }
+        public bool IsEquivalentDifference { get; private set; }
         public double Total { get; private set; }
+        public bool IsRealCashBalance { get; private set; }
+        public string RealCashDifferenceLabel { get; private set; }
+        public bool IsShowRealCashDifferenceLabel { get; private set; }
+        public bool IsShowRealCashDifference { get; private set; }
+        public string SummaryLabel { get; private set; }
         public bool IsShowDifference { get; private set; }
         public bool IsShowTotalLabel { get; private set; }
         public string TotalLabel { get; private set; }
         public bool IsShowDifferenceLabel { get; private set; }
         public string DifferenceLabel { get; private set; }
+        public bool IsShowSummaryBalance { get; }
+        public string SummaryBalanceLabel { get; }
+        public bool IsSummaryBalance { get; }
 
         public void SetSectionRowSpan(int sectionRowSpan)
         {

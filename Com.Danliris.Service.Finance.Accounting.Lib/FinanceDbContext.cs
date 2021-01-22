@@ -85,6 +85,8 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib
         public DbSet<BudgetCashflowCategoryModel> BudgetCashflowCategories { get; set; }
         public DbSet<BudgetCashflowSubCategoryModel> BudgetCashflowSubCategories { get; set; }
         public DbSet<BudgetCashflowUnitModel> BudgetCashflowUnits { get; set; }
+        public DbSet<InitialCashBalanceModel> InitialCashBalances { get; set; }
+        public DbSet<RealCashBalanceModel> RealCashBalances { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
