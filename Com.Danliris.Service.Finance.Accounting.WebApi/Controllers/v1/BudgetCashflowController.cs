@@ -1,4 +1,5 @@
 ﻿using Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashflow;
+using Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashflow.ExcelGenerator;
 using Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashflow.PdfGenerator;
 using Com.Danliris.Service.Finance.Accounting.Lib.Services.CacheService;
 using Com.Danliris.Service.Finance.Accounting.Lib.Services.IdentityService;
@@ -26,6 +27,7 @@ namespace Com.Danliris.Service.Finance.Accounting.WebApi.Controllers.v1
         private readonly IBudgetCashflowService _service;
         private readonly IValidateService _validateService;
         private readonly List<UnitDto> _units;
+        private readonly List<DivisionDto> _divisions;
         private const string ApiVersion = "1.0";
 
         public BudgetCashflowController(IServiceProvider serviceProvider)
@@ -37,6 +39,12 @@ namespace Com.Danliris.Service.Finance.Accounting.WebApi.Controllers.v1
             var cacheService = serviceProvider.GetService<ICacheService>();
             var jsonUnits = cacheService.GetString("Unit");
             _units = JsonConvert.DeserializeObject<List<UnitDto>>(jsonUnits, new JsonSerializerSettings
+            {
+                MissingMemberHandling = MissingMemberHandling.Ignore
+            });
+
+            var jsonDivisions = cacheService.GetString("Division");
+            _divisions = JsonConvert.DeserializeObject<List<DivisionDto>>(jsonDivisions, new JsonSerializerSettings
             {
                 MissingMemberHandling = MissingMemberHandling.Ignore
             });
@@ -152,6 +160,29 @@ namespace Com.Danliris.Service.Finance.Accounting.WebApi.Controllers.v1
             }
         }
 
+        [HttpGet("download/xls")]
+        public async Task<IActionResult> GenerateXls([FromQuery] int unitId, [FromQuery] DateTimeOffset date)
+        {
+
+            try
+            {
+                var data = await _service.GetBudgetCashflowUnit(unitId, date);
+                var unit = _units.FirstOrDefault(element => element.Id == unitId);
+                var stream = CashflowUnitExcelGenerator.Generate(unit, date, _identityService.TimezoneOffset, data);
+
+                var bytes = stream.ToArray();
+
+                return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Laporan Budget Cashflow.xlsx");
+            }
+            catch (Exception e)
+            {
+                var result =
+                    new ResultFormatter(ApiVersion, General.INTERNAL_ERROR_STATUS_CODE, e.Message)
+                    .Fail();
+                return StatusCode(General.INTERNAL_ERROR_STATUS_CODE, result);
+            }
+        }
+
         [HttpGet("divisions")]
         public async Task<IActionResult> GetDivision([FromQuery] int divisionId, [FromQuery] DateTimeOffset date)
         {
@@ -166,6 +197,52 @@ namespace Com.Danliris.Service.Finance.Accounting.WebApi.Controllers.v1
                     message = General.OK_MESSAGE,
                     data = result
                 });
+            }
+            catch (Exception e)
+            {
+                var result =
+                    new ResultFormatter(ApiVersion, General.INTERNAL_ERROR_STATUS_CODE, e.Message)
+                    .Fail();
+                return StatusCode(General.INTERNAL_ERROR_STATUS_CODE, result);
+            }
+        }
+
+        [HttpGet("divisions/download/pdf")]
+        public async Task<IActionResult> GeneratePdfDivision([FromQuery] int divisionId, [FromQuery] DateTimeOffset date)
+        {
+
+            try
+            {
+                var data = await _service.GetBudgetCashflowDivision(divisionId, date);
+                var division = _divisions.FirstOrDefault(element => element.Id == divisionId);
+                var stream = CashflowDivisionPdfGenerator.Generate(division, date, _identityService.TimezoneOffset, data);
+                return new FileStreamResult(stream, "application/pdf")
+                {
+                    FileDownloadName = "Laporan Budget Cashflow.pdf"
+                };
+            }
+            catch (Exception e)
+            {
+                var result =
+                    new ResultFormatter(ApiVersion, General.INTERNAL_ERROR_STATUS_CODE, e.Message)
+                    .Fail();
+                return StatusCode(General.INTERNAL_ERROR_STATUS_CODE, result);
+            }
+        }
+
+        [HttpGet("divisions/download/xls")]
+        public async Task<IActionResult> GenerateXlsDivision([FromQuery] int divisionId, [FromQuery] DateTimeOffset date)
+        {
+
+            try
+            {
+                var data = await _service.GetBudgetCashflowDivision(divisionId, date);
+                var division = _divisions.FirstOrDefault(element => element.Id == divisionId);
+                var stream = CashflowDivisionExcelGenerator.Generate(division, date, _identityService.TimezoneOffset, data);
+
+                var bytes = stream.ToArray();
+
+                return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Laporan Budget Cashflow.xlsx");
             }
             catch (Exception e)
             {

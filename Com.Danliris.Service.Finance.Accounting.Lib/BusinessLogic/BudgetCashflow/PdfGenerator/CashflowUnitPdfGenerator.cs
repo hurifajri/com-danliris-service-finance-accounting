@@ -52,26 +52,26 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
                 Border = Rectangle.RECTANGLE,
                 HorizontalAlignment = Element.ALIGN_CENTER,
                 VerticalAlignment = Element.ALIGN_TOP,
-                Rotation = 270
+                Rotation = 90
             };
 
             var cellCenter = new PdfPCell()
             {
-                Border = Rectangle.RECTANGLE,
+                Border = Element.RECTANGLE,
                 HorizontalAlignment = Element.ALIGN_CENTER,
                 VerticalAlignment = Element.ALIGN_CENTER
             };
 
             var cellLeft = new PdfPCell()
             {
-                Border = Rectangle.RECTANGLE,
+                Border = Element.RECTANGLE,
                 HorizontalAlignment = Element.ALIGN_LEFT,
                 VerticalAlignment = Element.ALIGN_CENTER
             };
 
             var cellRight = new PdfPCell()
             {
-                Border = Rectangle.RECTANGLE,
+                Border = Element.RECTANGLE,
                 HorizontalAlignment = Element.ALIGN_RIGHT,
                 VerticalAlignment = Element.ALIGN_CENTER
             };
@@ -141,9 +141,9 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
                     table.AddCell(cellCenter);
 
                     cellRight.Colspan = 1;
-                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
-                    table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.CurrencyNominal.ToString(), _smallFont);
+                    table.AddCell(cellRight);
+                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
                     table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.Total.ToString(), _smallFont);
                     table.AddCell(cellRight);
@@ -163,9 +163,9 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
                     table.AddCell(cellCenter);
 
                     cellRight.Colspan = 1;
-                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
-                    table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.CurrencyNominal.ToString(), _smallFont);
+                    table.AddCell(cellRight);
+                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
                     table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.Total.ToString(), _smallFont);
                     table.AddCell(cellRight);
@@ -185,9 +185,9 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
                     table.AddCell(cellCenter);
 
                     cellRight.Colspan = 1;
-                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
-                    table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.CurrencyNominal.ToString(), _smallFont);
+                    table.AddCell(cellRight);
+                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
                     table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.Total.ToString(), _smallFont);
                     table.AddCell(cellRight);
@@ -207,9 +207,9 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
                     table.AddCell(cellCenter);
 
                     cellRight.Colspan = 1;
-                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
-                    table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.CurrencyNominal.ToString(), _smallFont);
+                    table.AddCell(cellRight);
+                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
                     table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.Total.ToString(), _smallFont);
                     table.AddCell(cellRight);
@@ -229,9 +229,9 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
                     table.AddCell(cellCenter);
 
                     cellRight.Colspan = 1;
-                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
-                    table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.CurrencyNominal.ToString(), _smallFont);
+                    table.AddCell(cellRight);
+                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
                     table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.Total.ToString(), _smallFont);
                     table.AddCell(cellRight);
@@ -251,9 +251,9 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
                     table.AddCell(cellCenter);
 
                     cellRight.Colspan = 1;
-                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
-                    table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.CurrencyNominal.ToString(), _smallFont);
+                    table.AddCell(cellRight);
+                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
                     table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.Total.ToString(), _smallFont);
                     table.AddCell(cellRight);
@@ -294,9 +294,9 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
                     table.AddCell(cellCenter);
 
                     cellRight.Colspan = 1;
-                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
-                    table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.CurrencyNominal.ToString(), _smallFont);
+                    table.AddCell(cellRight);
+                    cellRight.Phrase = new Phrase(item.Nominal.ToString(), _smallFont);
                     table.AddCell(cellRight);
                     cellRight.Phrase = new Phrase(item.Total.ToString(), _smallFont);
                     table.AddCell(cellRight);

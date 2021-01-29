@@ -39,7 +39,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.Models.BudgetCashflow
         public ReportType ReportType { get; private set; }
         public bool IsImport { get; private set; }
 
-        public void SetNewValue(int cashflowCategoryId, bool isReadOnly, int layoutOrder, string name, List<int> purchasingCategoryIds, ReportType reportType)
+        public void SetNewValue(int cashflowCategoryId, bool isReadOnly, int layoutOrder, string name, List<int> purchasingCategoryIds, ReportType reportType, bool isImport)
         {
             Name = name;
             CashflowCategoryId = cashflowCategoryId;
@@ -51,6 +51,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.Models.BudgetCashflow
             PurchasingCategoryIds = JsonConvert.SerializeObject(purchasingCategoryIds);
             IsReadOnly = isReadOnly;
             ReportType = reportType;
+            IsImport = isImport;
         }
     }
 }

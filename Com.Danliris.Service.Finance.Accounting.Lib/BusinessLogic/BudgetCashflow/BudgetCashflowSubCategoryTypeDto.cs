@@ -16,6 +16,7 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
             ReportType = model.ReportType;
             ReportTypeName = model.ReportType.ToDescriptionString();
             CashflowCategoryId = model.CashflowCategoryId;
+            IsImport = model.IsImport;
         }
 
         public int Id { get; set; }
@@ -27,5 +28,6 @@ namespace Com.Danliris.Service.Finance.Accounting.Lib.BusinessLogic.BudgetCashfl
         public ReportType ReportType { get; set; }
         public string ReportTypeName { get; private set; }
         public int CashflowCategoryId { get; set; }
+        public bool IsImport { get; private set; }
     }
 }
